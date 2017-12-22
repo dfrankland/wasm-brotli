@@ -28,7 +28,6 @@
   ],
   "scripts": {
     "build": "rollup -c",
-    "pretest": "npm run build",
     "test": "jest",
     "lint": "eslint -c ./package.json ./*.js ./src/**/*.js ./benchmark/*.js ./benchmark/src/**/*.js"
   },
