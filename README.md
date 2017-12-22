@@ -21,7 +21,7 @@ Because WebAssembly is supported on both Node.js and several browsers,
 An example of compressing something and saving it to a file via Node.js.
 
 ```js
-import brotli from 'wasm-brotli';
+import { compress } from 'wasm-brotli';
 import { writeFile } from 'fs';
 import { promisify } from 'util';
 
@@ -31,7 +31,7 @@ const content = Buffer.from('Hello, world!', 'utf8');
 
 (async () => {
   try {
-    const compressedContent = await brotli(content);
+    const compressedContent = await compress(content);
     await writeFileAsync('./hello_world.txt.br', compressedContent);
   } catch (err) {
     console.error(err);
@@ -44,15 +44,15 @@ const content = Buffer.from('Hello, world!', 'utf8');
 An example of compressing something and downloading it from the browser.
 
 ```js
-import brotli from 'wasm-brotli';
+import { compress } from 'wasm-brotli';
 
 const content = new TextEncoder('utf-8').encode('Hello, world!');
 
 (async () => {
   try {
-    const compressedContent = await brotli(content);
+    const compressedContent = await compress(content);
 
-    const file = new File([compressedContent], 'hello_world.txt.gz', { type: 'application/brotli' });
+    const file = new File([compressedContent], 'hello_world.txt.br', { type: 'application/brotli' });
 
     const link = document.createElement('a');
     link.setAttribute('href', URL.createObjectURL(file));
@@ -66,11 +66,33 @@ const content = new TextEncoder('utf-8').encode('Hello, world!');
 
 ## Documentation
 
-### brotli(data)
+### compress(data)
 
 *   `data` [`<Uint8Array>`][mdn uint8array]
 
 Compress `data` using Brotli compression.
+
+### decompress(data)
+
+*   `data` [`<Uint8Array>`][mdn uint8array]
+
+Decompress `data` using Brotli decompression.
+
+### brotli(method, data)
+
+*   `method` `<BROTLI_COMPRESS>` | `<BROTLI_DECOMPRESS>`
+*   `data` [`<Uint8Array>`][mdn uint8array]
+
+The function that `compress` and `decompress` wrap. Pass any of the constants
+below and data to compress or decompress.
+
+### BROTLI_COMPRESS
+
+Constant, reference, for compressing data with `brotli`.
+
+### BROTLI_DECOMPRESS
+
+Constant, reference, for decompressing data with `brotli`.
 
 [mdn uint8array]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array
 
