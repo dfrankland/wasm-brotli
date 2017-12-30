@@ -66,33 +66,33 @@ const content = new TextEncoder('utf-8').encode('Hello, world!');
 
 ## Documentation
 
-### compress(data)
+### compress(buffer)
 
-*   `data` [`<Uint8Array>`][mdn uint8array]
+*   `buffer` [`<Uint8Array>`][mdn uint8array]
 
-Compress `data` using Brotli compression.
+Compress `buffer` using Brotli compression.
 
-### decompress(data)
+### decompress(buffer)
 
-*   `data` [`<Uint8Array>`][mdn uint8array]
+*   `buffer` [`<Uint8Array>`][mdn uint8array]
 
-Decompress `data` using Brotli decompression.
+Decompress `buffer` using Brotli decompression.
 
-### brotli(method, data)
+### brotli(method, buffer)
 
 *   `method` `<BROTLI_COMPRESS>` | `<BROTLI_DECOMPRESS>`
-*   `data` [`<Uint8Array>`][mdn uint8array]
+*   `buffer` [`<Uint8Array>`][mdn uint8array]
 
 The function that `compress` and `decompress` wrap. Pass any of the constants
-below and data to compress or decompress.
+below and a buffer to compress or decompress.
 
 ### BROTLI_COMPRESS
 
-Constant, reference, for compressing data with `brotli`.
+Constant, reference, for compressing a buffer with `brotli`.
 
 ### BROTLI_DECOMPRESS
 
-Constant, reference, for decompressing data with `brotli`.
+Constant, reference, for decompressing a buffer with `brotli`.
 
 [mdn uint8array]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array
 
