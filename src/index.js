@@ -1,6 +1,7 @@
 /* global WebAssembly */
 
-import { wrap } from 'kaffeerost';
+import { stringToPointer, pointerToString } from './cString';
+import utf8Decoder from './utf8Decoder';
 import brotliWasmModule from './brotli/Cargo.toml';
 
 export const BROTLI_COMPRESS = {};
@@ -11,30 +12,46 @@ const methods = new Map([
   [BROTLI_DECOMPRESS, 'decompress'],
 ]);
 
-export const brotli = async (method, data) => {
+export const brotli = async (method, buffer) => {
   if (!methods.has(method)) throw new Error('method is invalid');
-  if (!(data instanceof Uint8Array)) throw new Error('data must be a Uint8Array');
+  if (!(buffer instanceof Uint8Array)) throw new Error('buffer must be a Uint8Array');
 
-  const {
-    instance: {
-      exports,
-    } = {},
-  } = await brotliWasmModule({
-    env: {
-      memory: new WebAssembly.Memory({ initial: 4096, limit: 4096 }),
-      // log: x => Math.log(x), Maybe not needed?
-      log2f: x => Math.log2(x),
-    },
+  return new Promise(async (resolve, reject) => {
+    try {
+      const {
+        instance: {
+          exports,
+        } = {},
+      } = await brotliWasmModule({
+        env: {
+          memory: new WebAssembly.Memory({ initial: 0, limit: 4096 }),
+          log2f: x => Math.log2(x),
+          js_resolve: (ptr, len) => {
+            const result = pointerToString({ exports, ptr, len });
+            exports.dealloc(ptr, len);
+            resolve(result);
+          },
+          js_reject: (ptr, len) => {
+            const err = utf8Decoder(pointerToString({ exports, ptr, len }));
+            exports.dealloc(ptr, len);
+            reject(new Error(err));
+          },
+          js_console_log: (ptr, len) => {
+            const log = utf8Decoder(pointerToString({ exports, ptr, len }));
+            console.log(log); // eslint-disable-line no-console
+          },
+        },
+      });
+
+      const { [methods.get(method)]: brotliMethod } = exports;
+
+      const { ptr, len } = stringToPointer({ exports, buffer });
+
+      brotliMethod(ptr, len);
+    } catch (err) {
+      reject(err);
+    }
   });
-
-  const brotliMethod = wrap(
-    exports,
-    methods.get(method),
-    ['&[u8]'],
-    'Vec<u8>',
-  );
-
-  return brotliMethod(data);
 };
 
 export const compress = (...args) => brotli(BROTLI_COMPRESS, ...args);
