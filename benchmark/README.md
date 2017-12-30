@@ -42,17 +42,17 @@ High Sierra version 10.13.2:
 
 ```
 ## payload size: 1
-iltorb (native compress) x 2,135 ops/sec ±3.96% (69 runs sampled)
-wasm-brotli (rust wasm compress) x 4.92 ops/sec ±3.33% (28 runs sampled)
+iltorb (native compress) x 2,085 ops/sec ±2.78% (68 runs sampled)
+wasm-brotli (rust wasm compress) x 5.22 ops/sec ±3.28% (29 runs sampled)
 Fastest is iltorb (native compress)
 
 ## payload size: 1024
-iltorb (native compress) x 251 ops/sec ±0.94% (76 runs sampled)
-wasm-brotli (rust wasm compress) x 4.93 ops/sec ±2.28% (28 runs sampled)
+iltorb (native compress) x 244 ops/sec ±0.94% (78 runs sampled)
+wasm-brotli (rust wasm compress) x 5.21 ops/sec ±1.64% (29 runs sampled)
 Fastest is iltorb (native compress)
 
 ## payload size: 1038336
-iltorb (native compress) x 1.55 ops/sec ±1.70% (12 runs sampled)
-wasm-brotli (rust wasm compress) x 1.81 ops/sec ±1.78% (13 runs sampled)
+iltorb (native compress) x 1.59 ops/sec ±0.98% (12 runs sampled)
+wasm-brotli (rust wasm compress) x 2.52 ops/sec ±1.37% (16 runs sampled)
 Fastest is wasm-brotli (rust wasm compress)
 ```
