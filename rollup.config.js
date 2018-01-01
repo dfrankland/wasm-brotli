@@ -21,11 +21,7 @@ const baseConfig = ({
   output,
   plugins: [
     nodeResolve(),
-    commonjs({
-      namedExports: {
-        'node_modules/kaffeerost/index.js': ['wrap'],
-      },
-    }),
+    commonjs(),
     ...(replacers ? [null] : []).map(() => (
       replace(replacers)
     )),
