@@ -66,6 +66,7 @@ const baseConfig = ({
             && \
             cd ${resolvePath(HOST, `.${dirname(path)}`)} \
             && \
+            CARGO_HOME=./.cargo
             CARGO_TARGET_DIR=${DIST} \
               cargo build \
                 --release \
