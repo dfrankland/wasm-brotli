@@ -3,4 +3,4 @@ name = "wasm-brotli"
 version = "0.0.0"
 
 [dependencies]
-brotli = "1.0.9"
+brotli = "1.1.1"
