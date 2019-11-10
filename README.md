@@ -68,64 +68,66 @@ const content = new TextEncoder('utf-8').encode('Hello, world!');
 
 ### compress(buffer)
 
-*   `buffer` [`<Uint8Array>`][mdn uint8array]
+*   `buffer` [`<Uint8Array>`][]
 
 Compress `buffer` using Brotli compression.
 
 ### decompress(buffer)
 
-*   `buffer` [`<Uint8Array>`][mdn uint8array]
+*   `buffer` [`<Uint8Array>`][]
 
 Decompress `buffer` using Brotli decompression.
 
-### brotli(method, buffer)
-
-*   `method` `<BROTLI_COMPRESS>` | `<BROTLI_DECOMPRESS>`
-*   `buffer` [`<Uint8Array>`][mdn uint8array]
-
-The function that `compress` and `decompress` wrap. Pass any of the constants
-below and a buffer to compress or decompress.
-
-### BROTLI_COMPRESS
-
-Constant, reference, for compressing a buffer with `brotli`.
-
-### BROTLI_DECOMPRESS
-
-Constant, reference, for decompressing a buffer with `brotli`.
-
-[mdn uint8array]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array
-
-## Benchmark
-
-Want to see how fast this is? [Go to the benchmark directory][benchmark] to see
-results, instructions on running your own benchmark, and more.
-
-[benchmark]: https://github.com/dfrankland/wasm-brotli/tree/master/benchmark
+[`<Uint8Array>`]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array
 
 ## Development
 
-To build `wasm-brotli` you will need to [install Docker][docker install], and
-pull [`rustlang/rust:nightly`][rust nightly]. After that all that is needed is
-to do the following:
+To build `wasm-brotli` you will need to install [`wasm-pack`][]. After that all
+that is needed is to do the following:
 
 1.  Install all dependencies.
 
-```bash
-npm install
-```
+    ```bash
+    npm install
+    ```
 
 2.  Build the module.
 
-```bash
-npm run build
-```
+    ```bash
+    npm run build
+    ```
 
 3.  Test the module.
 
-```bash
-npm test
-```
+    ```bash
+    npm test
+    ```
 
-[docker install]: https://docs.docker.com/engine/installation/
-[rust nightly]: https://hub.docker.com/r/rustlang/rust/
+[`wasm-pack`]: https://rustwasm.github.io/wasm-pack/
+
+## Benchmark
+
+1.  Build `wasm-brotli` if you haven't already done so&mdash;
+    [see instructions here][].
+
+2.  Build and run the benchmark.
+
+    ```bash
+    npm run benchmark
+    ```
+
+3.  Wait a while... The tests might run quite slow.
+
+[see instructions here]: https://github.com/dfrankland/wasm-brotli#development
+
+These results are run on a Dell XPS 13 9360 with an Intel® Core™ i7-7500U CPU @
+2.70GHz × 4 and 16 GB 1866 MHz DDR3 memory, running Ubuntu 19.10:
+
+```
+iltorb (native compress)      1 byte(s)  x 5,159 ops/sec ±9.73% (66 runs sampled)
+wasm-brotli (wasm compress)   1 byte(s)  x 49.80 ops/sec ±0.61% (78 runs sampled)
+iltorb (native compress)      1024 byte(s)       x 329 ops/sec ±1.63% (81 runs sampled)
+wasm-brotli (wasm compress)   1024 byte(s)       x 32.33 ops/sec ±0.77% (76 runs sampled)
+iltorb (native compress)      1038336 byte(s)    x 2.23 ops/sec ±1.20% (15 runs sampled)
+wasm-brotli (wasm compress)   1038336 byte(s)    x 1.03 ops/sec ±0.93% (10 runs sampled)
+```
