@@ -10,7 +10,7 @@ module.exports = {
     'import/no-extraneous-dependencies': [
       'error',
       {
-        devDependencies: ['benchmark.ts'],
+        devDependencies: ['benchmark.ts', 'update-package-json.ts'],
       },
     ],
   },
