@@ -1,0 +1,35 @@
+branches:
+  only:
+  - master
+language: rust
+rust:
+  - nightly
+cache:
+  cargo: true
+  npm: true
+matrix:
+  include:
+    - os: linux # 14.04
+      dist: trusty
+before_install:
+  - nvm install --lts
+  - nvm use --lts
+  - node -v
+  - npm -v
+  - rustup target add wasm32-unknown-unknown
+  - rustup component add clippy || cargo install --git https://github.com/rust-lang/rust-clippy/ --force clippy
+  - rustup component add rustfmt || cargo install --git https://github.com/rust-lang/rustfmt/ --force rustfmt
+  - cargo install --force wasm-pack || cargo install --git https://github.com/rustwasm/wasm-pack/ --force wasm-pack
+install:
+  - npm install
+script:
+  - cargo build --target wasm32-unknown-unknown
+  - cargo test
+  - wasm-pack build
+  - wasm-pack test --node
+  - npm test -- --ci --maxWorkers 2
+  - cargo clippy --all-targets --all-features -- -D warnings
+  - cargo fmt --all -- --check
+  - npm run lint
+  - npm run typecheck
+  - npm run benchmark

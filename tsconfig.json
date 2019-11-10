@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "esnext",
+    "lib": ["dom", "esnext"],
+    "downlevelIteration": true,
+    "resolveJsonModule": true
+  },
+  "include": [
+    "./__tests__/**/*",
+    "./*"
+  ]
+}
