@@ -1,6 +1,8 @@
 # wasm-brotli
 
-WebAssembly compiled Brotli library.
+WebAssembly compiled Brotli library. [See a browser example on Codesandbox 👀][]
+
+[See a browser example on Codesandbox 👀]: https://codesandbox.io/s/wasm-brotli-example-uzpt5?fontsize=14
 
 ## Installation
 
