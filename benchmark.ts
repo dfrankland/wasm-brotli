@@ -12,12 +12,10 @@ compressWasm(randomBytes(1024 * 1024));
 
 [1, 1024, 1024 * 1014]
   .reduce((acc, size): Suite => {
-    const bytes = randomBytes(size);
-
     acc.add(`iltorb (native compress)\t${size} byte(s)\t`, {
       defer: true,
       fn: async (deffered: { resolve: Function }): Promise<void> => {
-        await compressNative(bytes);
+        await compressNative(randomBytes(size));
         deffered.resolve();
       },
     });
@@ -25,7 +23,7 @@ compressWasm(randomBytes(1024 * 1024));
     acc.add(`wasm-brotli (wasm compress)\t${size} byte(s)\t`, {
       defer: true,
       fn: async (deffered: { resolve: Function }): Promise<void> => {
-        compressWasm(bytes);
+        compressWasm(randomBytes(size));
         deffered.resolve();
       },
     });
