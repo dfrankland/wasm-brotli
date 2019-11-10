@@ -3,7 +3,7 @@ branches:
   - master
 language: rust
 rust:
-  - nightly
+  - stable
 cache:
   cargo: true
   npm: true
