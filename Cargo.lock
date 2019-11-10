@@ -259,7 +259,7 @@ dependencies = [
 
 [[package]]
 name = "wasm-brotli"
-version = "2.0.1"
+version = "2.0.2"
 dependencies = [
  "brotli 3.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "cfg-if 0.1.10 (registry+https://github.com/rust-lang/crates.io-index)",

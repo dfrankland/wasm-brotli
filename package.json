@@ -1,6 +1,6 @@
 {
   "name": "wasm-brotli",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "🗜 WebAssembly compiled Brotli library",
   "repository": {
     "type": "git",
