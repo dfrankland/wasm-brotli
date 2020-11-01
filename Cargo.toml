@@ -18,7 +18,7 @@ brotli = "3.3.0"
 console_error_panic_hook = { version = "0.1.6", optional = true }
 wasm-bindgen = "0.2.54"
 wee_alloc = "0.4.5"
-cfg-if = "0.1.10"
+cfg-if = "1.0.0"
 
 [dev-dependencies]
 wasm-bindgen-test = "0.3.4"
