@@ -1,0 +1,40 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: monthly
+    time: "13:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: "@types/node"
+    versions:
+    - 14.14.17
+    - 14.14.22
+  - dependency-name: "@babel/core"
+    versions:
+    - 7.12.10
+  - dependency-name: "@types/jest"
+    versions:
+    - 26.0.19
+  - dependency-name: "@babel/node"
+    versions:
+    - 7.12.10
+  - dependency-name: "@babel/preset-env"
+    versions:
+    - 7.12.11
+  - dependency-name: "@babel/preset-typescript"
+    versions:
+    - 7.12.7
+  - dependency-name: lodash
+    versions:
+    - 4.17.20
+  - dependency-name: handlebars
+    versions:
+    - 4.7.6
+- package-ecosystem: cargo
+  directory: "/"
+  schedule:
+    interval: monthly
+    time: "13:00"
+  open-pull-requests-limit: 10
